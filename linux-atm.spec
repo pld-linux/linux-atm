@@ -1,4 +1,4 @@
-# $Revision: 1.25 $ $Date: 2003-06-17 11:16:30 $
+# $Revision: 1.26 $ $Date: 2003-06-27 17:43:39 $
 Summary:	ATM on Linux
 Summary(pl):	Obs³uga sieci ATM w Linuksie
 Name:		linux-atm
@@ -14,6 +14,7 @@ Source2:	http://home.sch.bme.hu/~cell/br2684/dist/001212/pppbr-001212-br2684ctl.
 Patch0:		%{name}-syslog.patch
 Patch1:		%{name}-br2684ctl-syslog.patch
 Patch2:		ftp://ftp.cmf.nrl.navy.mil/pub/chas/linux-atm/vbr/vbr-linux-atm-diffs
+Patch3:		linux-atm-include.patch
 Icon:		linux-atm-logo.gif
 URL:		http://linux-atm.sourceforge.net/
 BuildRequires:	autoconf
@@ -92,6 +93,7 @@ install -m644 %{SOURCE2} .
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__libtoolize}
