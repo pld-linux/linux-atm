@@ -1,4 +1,4 @@
-# $Revision: 1.18 $ $Date: 2002-12-07 14:33:14 $
+# $Revision: 1.19 $ $Date: 2003-01-09 12:53:40 $
 Summary:	ATM on Linux
 Summary(pl):	Obs³uga sieci ATM w Linuksie
 Name:		linux-atm
@@ -20,8 +20,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 ATM (Asynchronous Transfer Mode) networking for Linux is still under
-development now but it works quite stable now and will most probably
-be included in 2.4.x series kernels. In PLD Linux it consists of some
+development now but it works quite stable now and has been already
+included in 2.4.x series kernels. In PLD Linux it consists of some
 patches for current kernel version containing drivers for a few
 popular ATM cards (ex. Fore, Madge, IDT) and PVC and SVC support. It
 also includes programs and scripts providing the most popular ATM
@@ -29,15 +29,15 @@ services, i.e. Classical IP (IP over ATM), LAN Emulation clients and
 servers, Multiprotocol Over ATM (MPOA) and some other goodies.
 
 %description -l pl
-Obs³uga sieci ATM (Asynchronous Transfer Mode) w Linuksie mimo i¿ jest
-jeszcze w stadium alfa dzia³a ju¿ bardzo stabilnie i
-najproawdopodobniej zostanie w³±czona do j±der serii 2.4.x. W Linuksie
-PLD sk³ada siê ona z ³at (patches) do bie¿±cej wersji j±dra
-zawieraj±cych sterowniki do kilku popularnych kart (m.in Fore, Madge,
-IDT) i zapewniaj±cych zestawianie po³±czeñ PVC i SVC oraz zestawu
-programów i skryptów (ten pakiet) realizuj±cych najpopularniejsze
-us³ugi ATM, tj. Classical IP (IP over ATM), klientów i serwery LAN
-Emulation (LANE), Multiprotocol Over ATM (MPOA) i inne rozmaito¶ci.
+Obs³uga sieci ATM (Asynchronous Transfer Mode) w Linuksie, mimo i¿
+jest nadal rozwijana, dzia³a ju¿ bardzo stabilnie i zosta³a ju¿
+w³±czona do j±der serii 2.4.x. W Linuksie PLD sk³ada siê ona z ³at
+(patches) do bie¿±cej wersji j±dra zawieraj±cych sterowniki do kilku
+popularnych kart (m.in Fore, Madge, IDT) i zapewniaj±cych zestawianie
+po³±czeñ PVC i SVC oraz zestawu programów i skryptów (ten pakiet)
+realizuj±cych najpopularniejsze us³ugi ATM, tj. Classical IP (IP over
+ATM), klientów i serwery LAN Emulation (LANE), Multiprotocol Over ATM
+(MPOA) i inne rozmaito¶ci.
 
 %package devel
 Summary:	ATM on Linux - developer's package
@@ -72,10 +72,10 @@ Linuksa.
 Summary:	ATM on Linux - rc-scripts
 Summary(pl):	Obs³uga sieci ATM w Linuksie - skrypty startowe
 Group:		Base
+PreReq:		rc-scripts >= 0.2.9
+Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}
-Requires:	rc-scripts >= 0.2.9
 Obsoletes:	atm-rc-scripts
-Prereq:		/sbin/chkconfig
 
 %description rc-scripts
 rc-scripts for ATM support.
@@ -99,7 +99,7 @@ install -m644 %{SOURCE2} .
 %{__make}
 
 pwd
-gcc $RPM_OPT_FLAGS -I./src/include pppbr-001212-br2684ctl.c \
+%{__cc} %{rpmcflags} -I./src/include pppbr-001212-br2684ctl.c \
 	-o br2684ctl -lresolv -L./src/lib/.libs -latm
 
 %install
@@ -123,8 +123,8 @@ install pld/network-scripts/{ifup-*,ifdown-*} \
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
 
 %post rc-scripts
 /sbin/chkconfig --add atm
