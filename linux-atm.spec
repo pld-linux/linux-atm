@@ -1,4 +1,4 @@
-# $Revision: 1.2 $ $Date: 2001-10-29 15:46:24 $
+# $Revision: 1.3 $ $Date: 2001-11-01 19:42:31 $
 Summary:	ATM on Linux
 Summary(pl):	Obs³uga sieci ATM w Linuxie
 Name:		linux-atm
@@ -14,7 +14,7 @@ Source1:	%{name}-%{version}.1-pldrc.tar.gz
 Source2:	http://home.sch.bme.hu/~cell/br2684/dist/001212/pppbr-001212-br2684ctl.c
 Patch0:		%{name}-syslog.patch
 Patch1:		%{name}-br2684ctl-syslog.patch
-Icon:		%{name}-logo.gif
+Icon:		linux-atm-logo.gif
 Obsoletes:	atm
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
