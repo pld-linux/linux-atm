@@ -1,4 +1,4 @@
-# $Revision: 1.28 $ $Date: 2004-03-30 21:37:16 $
+# $Revision: 1.29 $ $Date: 2004-04-01 08:44:36 $
 #
 # Conditional build:
 %bcond_without	vbr	# without VBR (which needs ATM/VBR kernel patch)
@@ -55,7 +55,7 @@ Summary:	ATM on Linux - developer's package
 Summary(pl):	Obs³uga sieci ATM w Linuksie - biblioteki i pliki nag³ówkowe
 Group:		Development/Libraries
 Obsoletes:	atm-devel
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Libraries and header files needed for development ATM applications for
@@ -70,7 +70,7 @@ Summary:	ATM on Linux - static libraries
 Summary(pl):	Obs³uga sieci ATM w Linuksie - biblioteki statyczne
 Group:		Development/Libraries
 Obsoletes:	atm-static
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static libraries needed for development ATM applications for Linux.
@@ -85,7 +85,7 @@ Summary(pl):	Obs³uga sieci ATM w Linuksie - skrypty startowe
 Group:		Base
 PreReq:		rc-scripts >= 0.2.9
 Requires(post,preun):	/sbin/chkconfig
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Obsoletes:	atm-rc-scripts
 
 %description rc-scripts
