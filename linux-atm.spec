@@ -1,4 +1,4 @@
-# $Revision: 1.17 $ $Date: 2002-11-27 21:10:41 $
+# $Revision: 1.18 $ $Date: 2002-12-07 14:33:14 $
 Summary:	ATM on Linux
 Summary(pl):	Obs³uga sieci ATM w Linuksie
 Name:		linux-atm
@@ -168,6 +168,6 @@ fi
 %files rc-scripts
 %defattr(644,root,root,755)
 %doc pld/README.PLD.gz pld/interfaces/ifcfg-*
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/sysconfig/atm
-%attr(755,root,root) %{_sysconfdir}/sysconfig/network-scripts/*
-%attr(754,root,root) %{_sysconfdir}/rc.d/init.d/atm
+%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/sysconfig/atm
+%attr(755,root,root) /etc/sysconfig/network-scripts/*
+%attr(754,root,root) /etc/rc.d/init.d/atm
