@@ -1,4 +1,4 @@
-# $Revision: 1.8 $ $Date: 2002-02-02 23:53:16 $
+# $Revision: 1.9 $ $Date: 2002-02-15 10:11:54 $
 Summary:	ATM on Linux
 Summary(pl):	Obs³uga sieci ATM w Linuxie
 Name:		linux-atm
@@ -6,10 +6,21 @@ Version:	2.4.0
 Release:	1
 License:	GPL
 Group:		Networking
+Group(cs):	Sí»ové
+Group(da):	Netværks
 Group(de):	Netzwerkwesen
 Group(es):	Red
+Group(fr):	Réseau
+Group(is):	Net
+Group(it):	Rete
+Group(no):	Nettverks
 Group(pl):	Sieciowe
 Group(pt_BR):	Rede
+Group(pt):	Rede
+Group(ru):	óÅÔØ
+Group(sl):	Omre¾ni
+Group(sv):	Nätverk
+Group(uk):	íÅÒÅÖÁ
 Source0:	http://prdownloads.sourceforge.net/linux-atm/%{name}-%{version}.tar.gz
 Source1:	%{name}-%{version}.1-pldrc.tar.gz
 Source2:	http://home.sch.bme.hu/~cell/br2684/dist/001212/pppbr-001212-br2684ctl.c
@@ -46,12 +57,21 @@ Emulation (LANE), Multiprotocol Over ATM (MPOA) i inne rozmaito¶ci.
 Summary:	ATM on Linux - developer's package
 Summary(pl):	Obs³uga sieci ATM w Linuxie - biblioteki i pliki nag³ówkowe
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
+Group(cs):	Vývojové prostøedky/Knihovny
+Group(da):	Udvikling/Biblioteker
+Group(de):	Entwicklung/Bibliotheken
 Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
+Group(is):	Þróunartól/Aðgerðasöfn
+Group(it):	Sviluppo/Librerie
+Group(ja):	³«È¯/¥é¥¤¥Ö¥é¥ê
+Group(no):	Utvikling/Bibliotek
 Group(pl):	Programowanie/Biblioteki
 Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(pt):	Desenvolvimento/Bibliotecas
 Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(sl):	Razvoj/Knji¾nice
+Group(sv):	Utveckling/Bibliotek
 Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Obsoletes:	atm-devel
 Requires:	%{name} = %{version}
@@ -60,7 +80,7 @@ Requires:	%{name} = %{version}
 Libraries and header files needed for development ATM applications for
 Linux.
 
-%description -l pl devel
+%description devel -l pl
 Biblioteki i pliki nag³ówkowe niezbêdne do opracowywania aplikacji ATM
 dla Linuxa.
 
@@ -68,12 +88,21 @@ dla Linuxa.
 Summary:	ATM on Linux - static libraries
 Summary(pl):	Obs³uga sieci ATM w Linuxie - biblioteki statyczne
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
+Group(cs):	Vývojové prostøedky/Knihovny
+Group(da):	Udvikling/Biblioteker
+Group(de):	Entwicklung/Bibliotheken
 Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
+Group(is):	Þróunartól/Aðgerðasöfn
+Group(it):	Sviluppo/Librerie
+Group(ja):	³«È¯/¥é¥¤¥Ö¥é¥ê
+Group(no):	Utvikling/Bibliotek
 Group(pl):	Programowanie/Biblioteki
 Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(pt):	Desenvolvimento/Bibliotecas
 Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(sl):	Razvoj/Knji¾nice
+Group(sv):	Utveckling/Bibliotek
 Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Obsoletes:	atm-static
 Requires:	%{name}-devel = %{version}
@@ -81,15 +110,31 @@ Requires:	%{name}-devel = %{version}
 %description static
 Static libraries needed for development ATM applications for Linux.
 
-%description -l pl static
-Biblioteki statyczne niezbêdne do opracowywania aplikacji ATM
-dla Linuxa.
+%description static -l pl
+Biblioteki statyczne niezbêdne do opracowywania aplikacji ATM dla
+Linuxa.
 
 %package rc-scripts
-Summary:        ATM on Linux - rc-scripts
-Summary(pl):    Obs³uga sieci ATM w Linuxie - skrypty startowe
-Group:          Base
-Requires:       %{name} = %{version}
+Summary:	ATM on Linux - rc-scripts
+Summary(pl):	Obs³uga sieci ATM w Linuxie - skrypty startowe
+Group:		Base
+Group(cs):	Základ
+Group(da):	Basal
+Group(de):	Basis
+Group(es):	Base
+Group(fr):	Base
+Group(is):	Grunnforrit
+Group(it):	Base
+Group(ja):	¥Ù¡¼¥¹
+Group(no):	Basis
+Group(pl):	Podstawowe
+Group(pt):	Base
+Group(pt_BR):	Base
+Group(ru):	âÁÚÁ
+Group(sl):	Osnova
+Group(sv):	Bas
+Group(uk):	âÁÚÁ
+Requires:	%{name} = %{version}
 Requires:	rc-scripts >= 0.2.9
 Obsoletes:	atm-rc-scripts
 Prereq:		/sbin/chkconfig
@@ -97,7 +142,7 @@ Prereq:		/sbin/chkconfig
 %description rc-scripts
 rc-scripts for ATM support.
 
-%description -l pl rc-scripts
+%description rc-scripts -l pl
 Skrypty startowe dla wsparcia obs³ugi ATM.
 
 %prep
@@ -109,7 +154,7 @@ install -m644 %{SOURCE2} .
 %build
 autoconf
 %configure \
-	--sysconfdir=/etc/atm \
+	--sysconfdir=%{_sysconfdir}/atm \
 	--enable-cisco \
 	--enable-mpoa_1_1
 
