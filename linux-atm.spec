@@ -1,4 +1,4 @@
-# $Revision: 1.13 $ $Date: 2002-02-23 03:36:24 $
+# $Revision: 1.14 $ $Date: 2002-05-21 23:14:03 $
 Summary:	ATM on Linux
 Summary(pl):	Obs³uga sieci ATM w Linuxie
 Name:		linux-atm
@@ -90,7 +90,7 @@ install -m644 %{SOURCE2} .
 %patch1 -p1
 
 %build
-autoconf
+%{__autoconf}
 %configure \
 	--sysconfdir=%{_sysconfdir}/atm \
 	--enable-cisco \
