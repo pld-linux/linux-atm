@@ -1,4 +1,4 @@
-# $Revision: 1.15 $ $Date: 2002-07-03 09:24:04 $
+# $Revision: 1.16 $ $Date: 2002-11-25 14:17:11 $
 Summary:	ATM on Linux
 Summary(pl):	Obs³uga sieci ATM w Linuksie
 Name:		linux-atm
@@ -159,7 +159,7 @@ fi
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.la
+%{_libdir}/lib*.la
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_includedir}/*
 
