@@ -1,4 +1,4 @@
-# $Revision: 1.1 $ $Date: 2001-10-28 01:43:47 $
+# $Revision: 1.2 $ $Date: 2001-10-29 15:46:24 $
 Summary:	ATM on Linux
 Summary(pl):	Obs³uga sieci ATM w Linuxie
 Name:		linux-atm
@@ -10,7 +10,7 @@ Group(de):	Netzwerkwesen
 Group(pl):	Sieciowe
 URL:		http://ica1www.epfl.ch/linux-atm/
 Source0:	http://prdownloads.sourceforge.net/linux-atm/%{name}-%{version}.tar.gz
-Source1:	%{name}-%{version}-pldrc.tar.gz
+Source1:	%{name}-%{version}.1-pldrc.tar.gz
 Source2:	http://home.sch.bme.hu/~cell/br2684/dist/001212/pppbr-001212-br2684ctl.c
 Patch0:		%{name}-syslog.patch
 Patch1:		%{name}-br2684ctl-syslog.patch
@@ -104,7 +104,8 @@ autoconf
 
 %{__make}
 
-gcc $RPM_OPT_FLAGS -I./lib pppbr-001212-br2684ctl.c -o br2684ctl -lresolv -L./lib -latm
+gcc $RPM_OPT_FLAGS -I./src/include pppbr-001212-br2684ctl.c \
+	-o br2684ctl -lresolv -L./src/lib/.libs -latm
 
 %install
 rm -rf $RPM_BUILD_ROOT
