@@ -1,4 +1,8 @@
-# $Revision: 1.26 $ $Date: 2003-06-27 17:43:39 $
+# $Revision: 1.27 $ $Date: 2003-10-19 00:26:10 $
+#
+# Conditional build:
+%bcond_without	vbr	# without VBR (which needs ATM/VBR kernel patch)
+#
 Summary:	ATM on Linux
 Summary(pl):	Obs³uga sieci ATM w Linuksie
 Name:		linux-atm
@@ -18,6 +22,8 @@ Patch3:		linux-atm-include.patch
 Icon:		linux-atm-logo.gif
 URL:		http://linux-atm.sourceforge.net/
 BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool
 Conflicts:	kernel-headers < 2.4
 Obsoletes:	atm
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -92,7 +98,7 @@ Skrypty startowe dla wsparcia obs³ugi ATM.
 install -m644 %{SOURCE2} .
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
+%{?with_vbr:%patch2 -p1}
 %patch3 -p1
 
 %build
@@ -116,16 +122,17 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/{atm,sysconfig/{interfaces,network-scripts},rc.d/init.d} \
 	$RPM_BUILD_ROOT/var/log/atm
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 install br2684ctl $RPM_BUILD_ROOT%{_sbindir}
 
 install src/config/hosts.atm $RPM_BUILD_ROOT%{_sysconfdir}
 install src/extra/ANS/e164_cc $RPM_BUILD_ROOT%{_sysconfdir}
 
-install pld/atm/*.conf $RPM_BUILD_ROOT%{_sysconfdir}/atm/
-install pld/init.d/atm $RPM_BUILD_ROOT/etc/rc.d/init.d/
-install pld/sysconfig/atm $RPM_BUILD_ROOT/etc/sysconfig/
+install pld/atm/*.conf $RPM_BUILD_ROOT%{_sysconfdir}/atm
+install pld/init.d/atm $RPM_BUILD_ROOT/etc/rc.d/init.d
+install pld/sysconfig/atm $RPM_BUILD_ROOT/etc/sysconfig
 install pld/network-scripts/{ifup-*,ifdown-*} \
 		$RPM_BUILD_ROOT/etc/sysconfig/network-scripts
 
@@ -151,9 +158,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc doc/README.* doc/atm-linux-howto.txt
-%doc BUGS AUTHORS ChangeLog README THANKS
-%doc pld/README.PLD pld/interfaces/ifcfg-*
+%doc doc/README.* doc/atm-linux-howto.txt AUTHORS BUGS ChangeLog README THANKS
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/hosts.atm
 %attr(750,root,root) %dir %{_sysconfdir}/atm
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/atm/*
@@ -166,8 +171,8 @@ fi
 
 %files devel
 %defattr(644,root,root,755)
-%{_libdir}/lib*.la
 %attr(755,root,root) %{_libdir}/lib*.so
+%{_libdir}/lib*.la
 %{_includedir}/*
 
 %files static
@@ -176,7 +181,7 @@ fi
 
 %files rc-scripts
 %defattr(644,root,root,755)
-%doc pld/README.PLD.gz pld/interfaces/ifcfg-*
+%doc pld/README.PLD pld/interfaces/ifcfg-*
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/sysconfig/atm
 %attr(755,root,root) /etc/sysconfig/network-scripts/*
 %attr(754,root,root) /etc/rc.d/init.d/atm
