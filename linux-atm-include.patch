@@ -1,0 +1,44 @@
+--- linux-atm-2.4.1/configure.in~	Thu Jun 19 02:34:05 2003
++++ linux-atm-2.4.1/configure.in	Thu Jun 19 02:38:57 2003
+@@ -53,7 +53,7 @@
+ dnl We don't want libresolv everywhere, just with libatm
+ LIBS=""
+ 
+-INCLUDES="-I\$(top_srcdir)/src/include"
++INCLUDES="-I\$(top_srcdir) -I\$(top_srcdir)/src/include"
+ CFLAGS="$INCLUDES $CFLAGS -Wall -Wshadow -Wpointer-arith -Wwrite-strings -Wstrict-prototypes"
+ dnl Add -d flag to bison/yacc to create intermediate .h files
+ YACC="$YACC -d"
+--- linux-atm-2.4.1/src/qgen/Makefile.am~	Mon Sep  3 20:41:05 2001
++++ linux-atm-2.4.1/src/qgen/Makefile.am	Thu Jun 19 02:49:12 2003
+@@ -38,24 +38,24 @@
+ 	{ rm -f default.nl; echo 1; }
+ 
+ q.out.h q.out.c q.test.c: qgen msg.fmt default.nl
+-	$(CPP) $(DEFS) - <msg.fmt | ./qgen
++	$(CPP) -I../.. $(DEFS) - <msg.fmt | ./qgen
+ 
+ #q40.out.h q40.out.c q40.test.c: qgen uni40 default.nl
+-#	$(CPP) $(DEFS) - <uni40 | PREFIX=q40 ./qgen
++#	$(CPP) -I../.. $(DEFS) - <uni40 | PREFIX=q40 ./qgen
+ 
+ qd.out.h qd.out.c qd.dump.c: qgen msg.fmt default.nl
+-	$(CPP) $(DEFS) - <msg.fmt | ./qgen -D
++	$(CPP) -I../.. $(DEFS) - <msg.fmt | ./qgen -D
+ 
+ q.out.o: q.out.c q.out.h qlib.c qlib.h
+-	$(CC) $(DEFS) $(CFLAGS) -c q.out.c
++	$(CC) -I../.. $(DEFS) $(CFLAGS) -c q.out.c
+ 
+ #q40.out.o: q40.out.c q40.out.h qlib.c qlib.h
+ #	$(CC) -DUNI40 $(CFLAGS) -c q40.out.c
+ 
+ qd.dump.o: qd.dump.c qd.out.c qlib.c qlib.h
+-	$(CC) $(DEFS) $(CFLAGS) -c qd.dump.c
++	$(CC) -I../.. $(DEFS) $(CFLAGS) -c qd.dump.c
+ 
+ qd.dump.standalone.o: qd.dump.c qd.out.c qlib.c qlib.h
+-	$(CC) $(DEFS) -DSTANDALONE $(CFLAGS) -c qd.dump.c \
++	$(CC) -I../.. $(DEFS) -DSTANDALONE $(CFLAGS) -c qd.dump.c \
+ 	-o qd.dump.standalone.o
+ 
