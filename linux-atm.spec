@@ -1,4 +1,4 @@
-# $Revision: 1.10 $ $Date: 2002-02-19 12:55:01 $
+# $Revision: 1.11 $ $Date: 2002-02-19 13:07:23 $
 Summary:	ATM on Linux
 Summary(pl):	Obs³uga sieci ATM w Linuxie
 Name:		linux-atm
@@ -150,7 +150,7 @@ Skrypty startowe dla wsparcia obs³ugi ATM.
 %setup -q -a1
 install -m644 %{SOURCE2} .
 %patch0 -p1
-#%patch1 -p1
+%patch1 -p1
 
 %build
 autoconf
