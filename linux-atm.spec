@@ -1,4 +1,4 @@
-# $Revision: 1.11 $ $Date: 2002-02-19 13:07:23 $
+# $Revision: 1.12 $ $Date: 2002-02-22 23:29:13 $
 Summary:	ATM on Linux
 Summary(pl):	Obs³uga sieci ATM w Linuxie
 Name:		linux-atm
@@ -6,21 +6,6 @@ Version:	2.4.0
 Release:	1
 License:	GPL
 Group:		Networking
-Group(cs):	Sí»ové
-Group(da):	Netværks
-Group(de):	Netzwerkwesen
-Group(es):	Red
-Group(fr):	Réseau
-Group(is):	Net
-Group(it):	Rete
-Group(no):	Nettverks
-Group(pl):	Sieciowe
-Group(pt_BR):	Rede
-Group(pt):	Rede
-Group(ru):	óÅÔØ
-Group(sl):	Omre¾ni
-Group(sv):	Nätverk
-Group(uk):	íÅÒÅÖÁ
 Source0:	http://prdownloads.sourceforge.net/linux-atm/%{name}-%{version}.tar.gz
 Source1:	%{name}-%{version}.1-pldrc.tar.gz
 Source2:	http://home.sch.bme.hu/~cell/br2684/dist/001212/pppbr-001212-br2684ctl.c
@@ -58,22 +43,6 @@ Emulation (LANE), Multiprotocol Over ATM (MPOA) i inne rozmaito¶ci.
 Summary:	ATM on Linux - developer's package
 Summary(pl):	Obs³uga sieci ATM w Linuxie - biblioteki i pliki nag³ówkowe
 Group:		Development/Libraries
-Group(cs):	Vývojové prostøedky/Knihovny
-Group(da):	Udvikling/Biblioteker
-Group(de):	Entwicklung/Bibliotheken
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(is):	Þróunartól/Aðgerðasöfn
-Group(it):	Sviluppo/Librerie
-Group(ja):	³«È¯/¥é¥¤¥Ö¥é¥ê
-Group(no):	Utvikling/Bibliotek
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(pt):	Desenvolvimento/Bibliotecas
-Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
-Group(sl):	Razvoj/Knji¾nice
-Group(sv):	Utveckling/Bibliotek
-Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Obsoletes:	atm-devel
 Requires:	%{name} = %{version}
 
@@ -89,22 +58,6 @@ dla Linuxa.
 Summary:	ATM on Linux - static libraries
 Summary(pl):	Obs³uga sieci ATM w Linuxie - biblioteki statyczne
 Group:		Development/Libraries
-Group(cs):	Vývojové prostøedky/Knihovny
-Group(da):	Udvikling/Biblioteker
-Group(de):	Entwicklung/Bibliotheken
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(is):	Þróunartól/Aðgerðasöfn
-Group(it):	Sviluppo/Librerie
-Group(ja):	³«È¯/¥é¥¤¥Ö¥é¥ê
-Group(no):	Utvikling/Bibliotek
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(pt):	Desenvolvimento/Bibliotecas
-Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
-Group(sl):	Razvoj/Knji¾nice
-Group(sv):	Utveckling/Bibliotek
-Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Obsoletes:	atm-static
 Requires:	%{name}-devel = %{version}
 
@@ -119,22 +72,6 @@ Linuxa.
 Summary:	ATM on Linux - rc-scripts
 Summary(pl):	Obs³uga sieci ATM w Linuxie - skrypty startowe
 Group:		Base
-Group(cs):	Základ
-Group(da):	Basal
-Group(de):	Basis
-Group(es):	Base
-Group(fr):	Base
-Group(is):	Grunnforrit
-Group(it):	Base
-Group(ja):	¥Ù¡¼¥¹
-Group(no):	Basis
-Group(pl):	Podstawowe
-Group(pt):	Base
-Group(pt_BR):	Base
-Group(ru):	âÁÚÁ
-Group(sl):	Osnova
-Group(sv):	Bas
-Group(uk):	âÁÚÁ
 Requires:	%{name} = %{version}
 Requires:	rc-scripts >= 0.2.9
 Obsoletes:	atm-rc-scripts
