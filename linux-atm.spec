@@ -1,4 +1,4 @@
-# $Revision: 1.4 $ $Date: 2001-12-22 21:09:09 $
+# $Revision: 1.5 $ $Date: 2001-12-22 21:59:53 $
 Summary:	ATM on Linux
 Summary(pl):	Obs³uga sieci ATM w Linuxie
 Name:		linux-atm
@@ -15,6 +15,7 @@ Patch0:		%{name}-syslog.patch
 Patch1:		%{name}-br2684ctl-syslog.patch
 Icon:		linux-atm-logo.gif
 URL:		http://linux-atm.sourceforge.net/
+Conflicts:	kernel-headers < 2.4
 Obsoletes:	atm
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -104,6 +105,7 @@ autoconf
 
 %{__make}
 
+pwd
 gcc $RPM_OPT_FLAGS -I./src/include pppbr-001212-br2684ctl.c \
 	-o br2684ctl -lresolv -L./src/lib/.libs -latm
 
