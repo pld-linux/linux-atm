@@ -1,16 +1,20 @@
-# $Revision: 1.21 $ $Date: 2003-05-25 05:50:12 $
+# $Revision: 1.22 $ $Date: 2003-05-30 17:31:27 $
 Summary:	ATM on Linux
 Summary(pl):	Obs³uga sieci ATM w Linuksie
 Name:		linux-atm
-Version:	2.4.0
+Version:	2.4.1
 Release:	1
 License:	GPL
 Group:		Networking
+# Source0-md5:	84fef49cc39ff2605204246666f65864
 Source0:	http://dl.sourceforge.net/linux-atm/%{name}-%{version}.tar.gz
-Source1:	%{name}-%{version}.1-pldrc.tar.gz
+# Source1-md5:	c76c7dbac5797db883b2b22687243839
+Source1:	ftp://sith.mimuw.edu.pl/pub/users/baggins/distfiles/%{name}-2.4.0.1-pldrc.tar.gz
+# Source2-md5:	1b0dfb2ded207b4d787a7748dd51a7df
 Source2:	http://home.sch.bme.hu/~cell/br2684/dist/001212/pppbr-001212-br2684ctl.c
 Patch0:		%{name}-syslog.patch
 Patch1:		%{name}-br2684ctl-syslog.patch
+Patch2:		ftp://ftp.cmf.nrl.navy.mil/pub/chas/linux-atm/vbr/vbr-linux-atm-diffs
 Icon:		linux-atm-logo.gif
 URL:		http://linux-atm.sourceforge.net/
 BuildRequires:	autoconf
@@ -88,8 +92,12 @@ Skrypty startowe dla wsparcia obs³ugi ATM.
 install -m644 %{SOURCE2} .
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
+%{__libtoolize}
+%{__aclocal}
+%{__automake}
 %{__autoconf}
 %configure \
 	--sysconfdir=%{_sysconfdir}/atm \
