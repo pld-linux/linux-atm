@@ -1,4 +1,4 @@
-# $Revision: 1.16 $ $Date: 2002-11-25 14:17:11 $
+# $Revision: 1.17 $ $Date: 2002-11-27 21:10:41 $
 Summary:	ATM on Linux
 Summary(pl):	Obs³uga sieci ATM w Linuksie
 Name:		linux-atm
@@ -120,10 +120,6 @@ install pld/sysconfig/atm $RPM_BUILD_ROOT/etc/sysconfig/
 install pld/network-scripts/{ifup-*,ifdown-*} \
 		$RPM_BUILD_ROOT/etc/sysconfig/network-scripts
 
-gzip -9nf doc/README.* doc/atm-linux-howto.txt \
-	BUGS AUTHORS ChangeLog README THANKS \
-	pld/README.PLD pld/interfaces/ifcfg-*
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -146,7 +142,9 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc doc/*.gz *.gz
+%doc doc/README.* doc/atm-linux-howto.txt
+%doc BUGS AUTHORS ChangeLog README THANKS
+%doc pld/README.PLD pld/interfaces/ifcfg-*
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/hosts.atm
 %attr(750,root,root) %dir %{_sysconfdir}/atm
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/atm/*
