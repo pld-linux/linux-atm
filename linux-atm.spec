@@ -1,4 +1,7 @@
-# $Revision: 1.29 $ $Date: 2004-04-01 08:44:36 $
+# $Revision: 1.30 $ $Date: 2004-08-20 11:38:37 $
+#
+# TODO:
+#		- split to libatm-*, atm-init and atm-progs.
 #
 # Conditional build:
 %bcond_without	vbr	# without VBR (which needs ATM/VBR kernel patch)
@@ -20,6 +23,7 @@ Patch1:		%{name}-br2684ctl-syslog.patch
 Patch2:		%{name}-include.patch
 Patch3:		ftp://ftp.cmf.nrl.navy.mil/pub/chas/linux-atm/vbr/vbr-linux-atm-diffs
 Patch4:		%{name}-llh-vbr.patch
+Patch5:		%{name}-gcc34.patch
 Icon:		linux-atm-logo.gif
 URL:		http://linux-atm.sourceforge.net/
 BuildRequires:	autoconf
@@ -104,6 +108,7 @@ install -m644 %{SOURCE2} .
 %patch3 -p1
 %patch4 -p1
 %endif
+%patch5 -p1
 
 %build
 %{__libtoolize}
@@ -118,8 +123,8 @@ install -m644 %{SOURCE2} .
 %{__make}
 
 pwd
-%{__cc} %{rpmcflags} -I./src/include pppbr-001212-br2684ctl.c \
-	-o br2684ctl -lresolv -L./src/lib/.libs -latm
+%{__cc} %{rpmcflags} %{rpmldflags} -Isrc/include pppbr-001212-br2684ctl.c \
+	-o br2684ctl -lresolv -Lsrc/lib/.libs -latm
 
 %install
 rm -rf $RPM_BUILD_ROOT
