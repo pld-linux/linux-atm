@@ -1,4 +1,4 @@
-# $Revision: 1.9 $ $Date: 2002-02-15 10:11:54 $
+# $Revision: 1.10 $ $Date: 2002-02-19 12:55:01 $
 Summary:	ATM on Linux
 Summary(pl):	Obs³uga sieci ATM w Linuxie
 Name:		linux-atm
@@ -28,6 +28,7 @@ Patch0:		%{name}-syslog.patch
 Patch1:		%{name}-br2684ctl-syslog.patch
 Icon:		linux-atm-logo.gif
 URL:		http://linux-atm.sourceforge.net/
+BuildRequires:	autoconf
 Conflicts:	kernel-headers < 2.4
 Obsoletes:	atm
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -149,7 +150,7 @@ Skrypty startowe dla wsparcia obs³ugi ATM.
 %setup -q -a1
 install -m644 %{SOURCE2} .
 %patch0 -p1
-%patch1 -p1
+#%patch1 -p1
 
 %build
 autoconf
