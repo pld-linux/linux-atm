@@ -1,4 +1,4 @@
-# $Revision: 1.27 $ $Date: 2003-10-19 00:26:10 $
+# $Revision: 1.28 $ $Date: 2004-03-30 21:37:16 $
 #
 # Conditional build:
 %bcond_without	vbr	# without VBR (which needs ATM/VBR kernel patch)
@@ -7,7 +7,7 @@ Summary:	ATM on Linux
 Summary(pl):	Obs³uga sieci ATM w Linuksie
 Name:		linux-atm
 Version:	2.4.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		Networking
 Source0:	http://dl.sourceforge.net/linux-atm/%{name}-%{version}.tar.gz
@@ -17,8 +17,9 @@ Source1:	%{name}-2.4.0.1-pldrc.tar.gz
 Source2:	http://home.sch.bme.hu/~cell/br2684/dist/001212/pppbr-001212-br2684ctl.c
 Patch0:		%{name}-syslog.patch
 Patch1:		%{name}-br2684ctl-syslog.patch
-Patch2:		ftp://ftp.cmf.nrl.navy.mil/pub/chas/linux-atm/vbr/vbr-linux-atm-diffs
-Patch3:		linux-atm-include.patch
+Patch2:		%{name}-include.patch
+Patch3:		ftp://ftp.cmf.nrl.navy.mil/pub/chas/linux-atm/vbr/vbr-linux-atm-diffs
+Patch4:		%{name}-llh-vbr.patch
 Icon:		linux-atm-logo.gif
 URL:		http://linux-atm.sourceforge.net/
 BuildRequires:	autoconf
@@ -98,8 +99,11 @@ Skrypty startowe dla wsparcia obs³ugi ATM.
 install -m644 %{SOURCE2} .
 %patch0 -p1
 %patch1 -p1
-%{?with_vbr:%patch2 -p1}
+%patch2 -p1
+%if %{with vbr}
 %patch3 -p1
+%patch4 -p1
+%endif
 
 %build
 %{__libtoolize}
