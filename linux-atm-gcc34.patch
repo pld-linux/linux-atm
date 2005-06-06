@@ -44,3 +44,26 @@
  	}
      if (argc != optind+1) usage(name);
      sioc.number = strtol(argv[optind],&end,0);
+--- linux-atm-2.4.1/src/qgen/qlib.c.orig	2001-09-03 20:41:05.000000000 +0200
++++ linux-atm-2.4.1/src/qgen/qlib.c	2005-06-06 08:54:09.000000000 +0200
+@@ -6,11 +6,7 @@
+ #include <config.h>
+ #endif
+ 
+-#ifdef DUMP_MODE
+-static int q_dump = 0;
+-#else
+ int q_dump = 0;
+-#endif
+ 
+ #ifndef STANDALONE
+ #define DUMP qd_dump
+@@ -26,7 +22,7 @@
+ #include "op.h"
+ 
+ 
+-static int debug = 0;
++int debug = 0;
+ 
+ 
+ void PREFIX(report)(int severity,const char *msg,...)
