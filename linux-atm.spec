@@ -1,7 +1,28 @@
-# $Revision: 1.30 $ $Date: 2004-08-20 11:38:37 $
+# $Revision: 1.31 $ $Date: 2005-06-06 07:02:04 $
 #
 # TODO:
 #		- split to libatm-*, atm-init and atm-progs.
+#		- fix:
+#i686-pld-linux-gcc -I../.. -DHAVE_CONFIG_H -I../.. -I../../src/include -O2 -march=i686
+#-mtune=pentium4  -pipe -Wall -Wshadow -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -c qd.dump.c
+#i686-pld-linux-gcc -E -I../.. -DHAVE_CONFIG_H - <msg.fmt | ./qgen
+#<stdin>:93:1: error: pasting "}" and "fw_pcr_0" does not give a valid preprocessing token
+#<stdin>:93:1: error: pasting "}" and "bw_pcr_0" does not give a valid preprocessing token
+#<stdin>:93:1: error: pasting "}" and "fw_pcr_01" does not give a valid preprocessing token
+#<stdin>:93:1: error: pasting "}" and "bw_pcr_01" does not give a valid preprocessing token
+#<stdin>:93:1: error: pasting "}" and "fw_scr_0" does not give a valid preprocessing token
+#<stdin>:93:1: error: pasting "}" and "bw_scr_0" does not give a valid preprocessing token
+#<stdin>:93:1: error: pasting "}" and "fw_scr_01" does not give a valid preprocessing token
+#<stdin>:93:1: error: pasting "}" and "bw_scr_01" does not give a valid preprocessing token
+#<stdin>:93:1: error: pasting "}" and "fw_mbs_0" does not give a valid preprocessing token
+#<stdin>:93:1: error: pasting "}" and "bw_mbs_0" does not give a valid preprocessing token
+#<stdin>:93:1: error: pasting "}" and "fw_mbs_01" does not give a valid preprocessing token
+#<stdin>:93:1: error: pasting "}" and "bw_mbs_01" does not give a valid preprocessing token
+#<stdin>:93:1: error: pasting "}" and "best_effort" does not give a valid preprocessing token
+#<stdin>:138:3: error: invalid preprocessing directive #Note
+#<stdin>:139:9: error: invalid preprocessing directive #to
+#  229 groups, 213 fields (26 var-len), construction area is 1069 bytes,
+#    3490 words in constructor, 3244 words in parser.
 #
 # Conditional build:
 %bcond_without	vbr	# without VBR (which needs ATM/VBR kernel patch)
