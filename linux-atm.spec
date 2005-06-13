@@ -1,4 +1,4 @@
-# $Revision: 1.31 $ $Date: 2005-06-06 07:02:04 $
+# $Revision: 1.32 $ $Date: 2005-06-13 10:35:47 $
 #
 # TODO:
 #		- split to libatm-*, atm-init and atm-progs.
@@ -31,7 +31,7 @@ Summary:	ATM on Linux
 Summary(pl):	Obs³uga sieci ATM w Linuksie
 Name:		linux-atm
 Version:	2.4.1
-Release:	2
+Release:	3
 License:	GPL
 Group:		Networking
 Source0:	http://dl.sourceforge.net/linux-atm/%{name}-%{version}.tar.gz
@@ -44,7 +44,7 @@ Patch1:		%{name}-br2684ctl-syslog.patch
 Patch2:		%{name}-include.patch
 Patch3:		ftp://ftp.cmf.nrl.navy.mil/pub/chas/linux-atm/vbr/vbr-linux-atm-diffs
 Patch4:		%{name}-llh-vbr.patch
-Patch5:		%{name}-gcc34.patch
+Patch5:		%{name}-gcc4.patch
 Icon:		linux-atm-logo.gif
 URL:		http://linux-atm.sourceforge.net/
 BuildRequires:	autoconf
