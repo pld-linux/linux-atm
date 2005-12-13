@@ -1,4 +1,4 @@
-# $Revision: 1.32 $ $Date: 2005-06-13 10:35:47 $
+# $Revision: 1.33 $ $Date: 2005-12-13 11:54:17 $
 #
 # TODO:
 #		- split to libatm-*, atm-init and atm-progs.
@@ -42,7 +42,7 @@ Source2:	http://home.sch.bme.hu/~cell/br2684/dist/001212/pppbr-001212-br2684ctl.
 Patch0:		%{name}-syslog.patch
 Patch1:		%{name}-br2684ctl-syslog.patch
 Patch2:		%{name}-include.patch
-Patch3:		ftp://ftp.cmf.nrl.navy.mil/pub/chas/linux-atm/vbr/vbr-linux-atm-diffs
+Patch3:		ftp://ftp.cmf.nrl.navy.mil/pub/chas/linux-atm/vbr/vbr-%{name}-diffs
 Patch4:		%{name}-llh-vbr.patch
 Patch5:		%{name}-gcc4.patch
 Icon:		linux-atm-logo.gif
@@ -108,9 +108,9 @@ Linuksa.
 Summary:	ATM on Linux - rc-scripts
 Summary(pl):	Obs³uga sieci ATM w Linuksie - skrypty startowe
 Group:		Base
-PreReq:		rc-scripts >= 0.2.9
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
+Requires:	rc-scripts >= 0.2.9
 Obsoletes:	atm-rc-scripts
 
 %description rc-scripts
@@ -189,9 +189,9 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc doc/README.* doc/atm-linux-howto.txt AUTHORS BUGS ChangeLog README THANKS
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/hosts.atm
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/hosts.atm
 %attr(750,root,root) %dir %{_sysconfdir}/atm
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/atm/*
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/atm/*
 %config %{_sysconfdir}/e164_cc
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
@@ -212,6 +212,6 @@ fi
 %files rc-scripts
 %defattr(644,root,root,755)
 %doc pld/README.PLD pld/interfaces/ifcfg-*
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/sysconfig/atm
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/atm
 %attr(755,root,root) /etc/sysconfig/network-scripts/*
 %attr(754,root,root) /etc/rc.d/init.d/atm
