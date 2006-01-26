@@ -1,4 +1,4 @@
-# $Revision: 1.34 $ $Date: 2006-01-21 00:01:17 $
+# $Revision: 1.35 $ $Date: 2006-01-26 13:26:25 $
 #
 # TODO:
 #		- split to libatm-*, atm-init and atm-progs.
@@ -48,6 +48,7 @@ Patch5:		%{name}-gcc4.patch
 URL:		http://linux-atm.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	flex
 BuildRequires:	libtool
 Conflicts:	kernel-headers < 2.4
 Obsoletes:	atm
