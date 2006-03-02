@@ -1,4 +1,4 @@
-# $Revision: 1.35 $ $Date: 2006-01-26 13:26:25 $
+# $Revision: 1.36 $ $Date: 2006-03-02 23:01:11 $
 #
 # TODO:
 #		- split to libatm-*, atm-init and atm-progs.
@@ -50,8 +50,9 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flex
 BuildRequires:	libtool
-Conflicts:	kernel-headers < 2.4
+BuildRequires:	rpmbuild(macros) >= 1.268
 Obsoletes:	atm
+Conflicts:	kernel-headers < 2.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -79,8 +80,8 @@ ATM), klientów i serwery LAN Emulation (LANE), Multiprotocol Over ATM
 Summary:	ATM on Linux - developer's package
 Summary(pl):	Obs³uga sieci ATM w Linuksie - biblioteki i pliki nag³ówkowe
 Group:		Development/Libraries
-Obsoletes:	atm-devel
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	atm-devel
 
 %description devel
 Libraries and header files needed for development ATM applications for
@@ -94,8 +95,8 @@ dla Linuksa.
 Summary:	ATM on Linux - static libraries
 Summary(pl):	Obs³uga sieci ATM w Linuksie - biblioteki statyczne
 Group:		Development/Libraries
-Obsoletes:	atm-static
 Requires:	%{name}-devel = %{version}-%{release}
+Obsoletes:	atm-static
 
 %description static
 Static libraries needed for development ATM applications for Linux.
@@ -174,15 +175,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %post rc-scripts
 /sbin/chkconfig --add atm
-if [ -f /var/lock/subsys/atm ]; then
-	/etc/rc.d/init.d/atm restart 1>&2
-fi
+%service atm restart
 
 %preun rc-scripts
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/atm ]; then
-		/etc/rc.d/init.d/atm stop 1>&2
-	fi
+	%service atm stop
 	/sbin/chkconfig --del atm
 fi
 
