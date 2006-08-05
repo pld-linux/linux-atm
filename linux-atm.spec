@@ -1,4 +1,4 @@
-# $Revision: 1.36 $ $Date: 2006-03-02 23:01:11 $
+# $Revision: 1.37 $ $Date: 2006-08-05 00:23:23 $
 #
 # TODO:
 #		- split to libatm-*, atm-init and atm-progs.
@@ -45,6 +45,7 @@ Patch2:		%{name}-include.patch
 Patch3:		ftp://ftp.cmf.nrl.navy.mil/pub/chas/linux-atm/vbr/vbr-%{name}-diffs
 Patch4:		%{name}-llh-vbr.patch
 Patch5:		%{name}-gcc4.patch
+Patch6:		%{name}-LDFLAGS.patch
 URL:		http://linux-atm.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -131,6 +132,7 @@ install -m644 %{SOURCE2} .
 %patch4 -p1
 %endif
 %patch5 -p1
+%patch6 -p1
 
 %build
 %{__libtoolize}
