@@ -1,4 +1,4 @@
-# $Revision: 1.37 $ $Date: 2006-08-05 00:23:23 $
+# $Revision: 1.38 $ $Date: 2007-02-12 00:49:06 $
 #
 # TODO:
 #		- split to libatm-*, atm-init and atm-progs.
@@ -28,7 +28,7 @@
 %bcond_without	vbr	# without VBR (which needs ATM/VBR kernel patch)
 #
 Summary:	ATM on Linux
-Summary(pl):	Obs≥uga sieci ATM w Linuksie
+Summary(pl.UTF-8):   Obs≈Çuga sieci ATM w Linuksie
 Name:		linux-atm
 Version:	2.4.1
 Release:	3
@@ -45,7 +45,15 @@ Patch2:		%{name}-include.patch
 Patch3:		ftp://ftp.cmf.nrl.navy.mil/pub/chas/linux-atm/vbr/vbr-%{name}-diffs
 Patch4:		%{name}-llh-vbr.patch
 Patch5:		%{name}-gcc4.patch
+<<<<<<< linux-atm.spec
+<<<<<<< linux-atm.spec
+Patch6:		%{name}-stdlib.patch
+Icon:		linux-atm-logo.gif
+=======
+>>>>>>> 1.34
+=======
 Patch6:		%{name}-LDFLAGS.patch
+>>>>>>> 1.37
 URL:		http://linux-atm.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -66,20 +74,20 @@ also includes programs and scripts providing the most popular ATM
 services, i.e. Classical IP (IP over ATM), LAN Emulation clients and
 servers, Multiprotocol Over ATM (MPOA) and some other goodies.
 
-%description -l pl
-Obs≥uga sieci ATM (Asynchronous Transfer Mode) w Linuksie, mimo iø
-jest nadal rozwijana, dzia≥a juø bardzo stabilnie i zosta≥a juø
-w≥±czona do j±der serii 2.4.x. W Linuksie PLD sk≥ada siÍ ona z ≥at
-(patches) do bieø±cej wersji j±dra zawieraj±cych sterowniki do kilku
-popularnych kart (m.in Fore, Madge, IDT) i zapewniaj±cych zestawianie
-po≥±czeÒ PVC i SVC oraz zestawu programÛw i skryptÛw (ten pakiet)
-realizuj±cych najpopularniejsze us≥ugi ATM, tj. Classical IP (IP over
-ATM), klientÛw i serwery LAN Emulation (LANE), Multiprotocol Over ATM
-(MPOA) i inne rozmaito∂ci.
+%description -l pl.UTF-8
+Obs≈Çuga sieci ATM (Asynchronous Transfer Mode) w Linuksie, mimo i≈º
+jest nadal rozwijana, dzia≈Ça ju≈º bardzo stabilnie i zosta≈Ça ju≈º
+w≈ÇƒÖczona do jƒÖder serii 2.4.x. W Linuksie PLD sk≈Çada siƒô ona z ≈Çat
+(patches) do bie≈ºƒÖcej wersji jƒÖdra zawierajƒÖcych sterowniki do kilku
+popularnych kart (m.in Fore, Madge, IDT) i zapewniajƒÖcych zestawianie
+po≈ÇƒÖcze≈Ñ PVC i SVC oraz zestawu program√≥w i skrypt√≥w (ten pakiet)
+realizujƒÖcych najpopularniejsze us≈Çugi ATM, tj. Classical IP (IP over
+ATM), klient√≥w i serwery LAN Emulation (LANE), Multiprotocol Over ATM
+(MPOA) i inne rozmaito≈õci.
 
 %package devel
 Summary:	ATM on Linux - developer's package
-Summary(pl):	Obs≥uga sieci ATM w Linuksie - biblioteki i pliki nag≥Ûwkowe
+Summary(pl.UTF-8):   Obs≈Çuga sieci ATM w Linuksie - biblioteki i pliki nag≈Ç√≥wkowe
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	atm-devel
@@ -88,13 +96,13 @@ Obsoletes:	atm-devel
 Libraries and header files needed for development ATM applications for
 Linux.
 
-%description devel -l pl
-Biblioteki i pliki nag≥Ûwkowe niezbÍdne do opracowywania aplikacji ATM
+%description devel -l pl.UTF-8
+Biblioteki i pliki nag≈Ç√≥wkowe niezbƒôdne do opracowywania aplikacji ATM
 dla Linuksa.
 
 %package static
 Summary:	ATM on Linux - static libraries
-Summary(pl):	Obs≥uga sieci ATM w Linuksie - biblioteki statyczne
+Summary(pl.UTF-8):   Obs≈Çuga sieci ATM w Linuksie - biblioteki statyczne
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Obsoletes:	atm-static
@@ -102,13 +110,13 @@ Obsoletes:	atm-static
 %description static
 Static libraries needed for development ATM applications for Linux.
 
-%description static -l pl
-Biblioteki statyczne niezbÍdne do opracowywania aplikacji ATM dla
+%description static -l pl.UTF-8
+Biblioteki statyczne niezbƒôdne do opracowywania aplikacji ATM dla
 Linuksa.
 
 %package rc-scripts
 Summary:	ATM on Linux - rc-scripts
-Summary(pl):	Obs≥uga sieci ATM w Linuksie - skrypty startowe
+Summary(pl.UTF-8):   Obs≈Çuga sieci ATM w Linuksie - skrypty startowe
 Group:		Base
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
@@ -118,8 +126,8 @@ Obsoletes:	atm-rc-scripts
 %description rc-scripts
 rc-scripts for ATM support.
 
-%description rc-scripts -l pl
-Skrypty startowe dla wsparcia obs≥ugi ATM.
+%description rc-scripts -l pl.UTF-8
+Skrypty startowe dla wsparcia obs≈Çugi ATM.
 
 %prep
 %setup -q -a1
