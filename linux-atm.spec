@@ -1,4 +1,4 @@
-# $Revision: 1.38 $ $Date: 2007-02-12 00:49:06 $
+# $Revision: 1.39 $ $Date: 2007-02-13 06:46:52 $
 #
 # TODO:
 #		- split to libatm-*, atm-init and atm-progs.
@@ -28,7 +28,7 @@
 %bcond_without	vbr	# without VBR (which needs ATM/VBR kernel patch)
 #
 Summary:	ATM on Linux
-Summary(pl.UTF-8):   Obsługa sieci ATM w Linuksie
+Summary(pl.UTF-8):	Obsługa sieci ATM w Linuksie
 Name:		linux-atm
 Version:	2.4.1
 Release:	3
@@ -87,7 +87,7 @@ ATM), klientów i serwery LAN Emulation (LANE), Multiprotocol Over ATM
 
 %package devel
 Summary:	ATM on Linux - developer's package
-Summary(pl.UTF-8):   Obsługa sieci ATM w Linuksie - biblioteki i pliki nagłówkowe
+Summary(pl.UTF-8):	Obsługa sieci ATM w Linuksie - biblioteki i pliki nagłówkowe
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	atm-devel
@@ -102,7 +102,7 @@ dla Linuksa.
 
 %package static
 Summary:	ATM on Linux - static libraries
-Summary(pl.UTF-8):   Obsługa sieci ATM w Linuksie - biblioteki statyczne
+Summary(pl.UTF-8):	Obsługa sieci ATM w Linuksie - biblioteki statyczne
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Obsoletes:	atm-static
@@ -116,7 +116,7 @@ Linuksa.
 
 %package rc-scripts
 Summary:	ATM on Linux - rc-scripts
-Summary(pl.UTF-8):   Obsługa sieci ATM w Linuksie - skrypty startowe
+Summary(pl.UTF-8):	Obsługa sieci ATM w Linuksie - skrypty startowe
 Group:		Base
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
