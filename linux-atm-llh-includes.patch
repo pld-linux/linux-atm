@@ -1,0 +1,22 @@
+diff -Nur linux-atm-2.4.1.orig/src/arpd/arp.c linux-atm-2.4.1.llh-includes/src/arpd/arp.c
+--- linux-atm-2.4.1.orig/src/arpd/arp.c	2001-09-03 21:41:05.000000000 +0300
++++ linux-atm-2.4.1.llh-includes/src/arpd/arp.c	2007-05-18 19:59:56.000000000 +0300
+@@ -14,6 +14,7 @@
+ #include <assert.h>
+ #include <sys/types.h>
+ #include <sys/socket.h> /* for linux/if_arp.h */
++#include <linux/types.h> /* for linux/if_arp.h */
+ #include <netinet/in.h> /* for ntohs, etc. */
+ #define _LINUX_NETDEVICE_H /* very crude hack for glibc2 */
+ #include <linux/if_arp.h>
+diff -Nur linux-atm-2.4.1.orig/src/arpd/itf.c linux-atm-2.4.1.llh-includes/src/arpd/itf.c
+--- linux-atm-2.4.1.orig/src/arpd/itf.c	2001-09-03 21:41:05.000000000 +0300
++++ linux-atm-2.4.1.llh-includes/src/arpd/itf.c	2007-05-18 20:00:10.000000000 +0300
+@@ -12,6 +12,7 @@
+ #include <sys/types.h>
+ #include <linux/atmclip.h>
+ #include <sys/socket.h>
++#include <linux/types.h> /* for linux/if_arp.h */
+ #define _LINUX_NETDEVICE_H /* glibc2 */
+ #include <linux/if_arp.h>
+ 
