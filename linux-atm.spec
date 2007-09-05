@@ -1,4 +1,4 @@
-# $Revision: 1.41 $ $Date: 2007-05-18 17:03:00 $
+# $Revision: 1.42 $ $Date: 2007-09-05 14:58:20 $
 #
 # TODO:
 #		- split to libatm-*, atm-init and atm-progs.
@@ -31,7 +31,7 @@ Summary:	ATM on Linux
 Summary(pl.UTF-8):	Obsługa sieci ATM w Linuksie
 Name:		linux-atm
 Version:	2.4.1
-Release:	3
+Release:	4
 License:	GPL
 Group:		Networking
 Source0:	http://dl.sourceforge.net/linux-atm/%{name}-%{version}.tar.gz
