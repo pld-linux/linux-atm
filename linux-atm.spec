@@ -1,52 +1,26 @@
-# $Revision: 1.42 $ $Date: 2007-09-05 14:58:20 $
+# $Revision: 1.43 $ $Date: 2008-01-08 19:08:48 $
 #
 # TODO:
 #		- split to libatm-*, atm-init and atm-progs.
-#		- fix:
-#i686-pld-linux-gcc -I../.. -DHAVE_CONFIG_H -I../.. -I../../src/include -O2 -march=i686
-#-mtune=pentium4  -pipe -Wall -Wshadow -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -c qd.dump.c
-#i686-pld-linux-gcc -E -I../.. -DHAVE_CONFIG_H - <msg.fmt | ./qgen
-#<stdin>:93:1: error: pasting "}" and "fw_pcr_0" does not give a valid preprocessing token
-#<stdin>:93:1: error: pasting "}" and "bw_pcr_0" does not give a valid preprocessing token
-#<stdin>:93:1: error: pasting "}" and "fw_pcr_01" does not give a valid preprocessing token
-#<stdin>:93:1: error: pasting "}" and "bw_pcr_01" does not give a valid preprocessing token
-#<stdin>:93:1: error: pasting "}" and "fw_scr_0" does not give a valid preprocessing token
-#<stdin>:93:1: error: pasting "}" and "bw_scr_0" does not give a valid preprocessing token
-#<stdin>:93:1: error: pasting "}" and "fw_scr_01" does not give a valid preprocessing token
-#<stdin>:93:1: error: pasting "}" and "bw_scr_01" does not give a valid preprocessing token
-#<stdin>:93:1: error: pasting "}" and "fw_mbs_0" does not give a valid preprocessing token
-#<stdin>:93:1: error: pasting "}" and "bw_mbs_0" does not give a valid preprocessing token
-#<stdin>:93:1: error: pasting "}" and "fw_mbs_01" does not give a valid preprocessing token
-#<stdin>:93:1: error: pasting "}" and "bw_mbs_01" does not give a valid preprocessing token
-#<stdin>:93:1: error: pasting "}" and "best_effort" does not give a valid preprocessing token
-#<stdin>:138:3: error: invalid preprocessing directive #Note
-#<stdin>:139:9: error: invalid preprocessing directive #to
-#  229 groups, 213 fields (26 var-len), construction area is 1069 bytes,
-#    3490 words in constructor, 3244 words in parser.
 #
 # Conditional build:
+%bcond_without	oam	# without OAM (which needs ATM/OAM kernel patch)
 %bcond_without	vbr	# without VBR (which needs ATM/VBR kernel patch)
 #
 Summary:	ATM on Linux
 Summary(pl.UTF-8):	Obsługa sieci ATM w Linuksie
 Name:		linux-atm
-Version:	2.4.1
-Release:	4
+Version:	2.5.0
+Release:	0.1
 License:	GPL
 Group:		Networking
 Source0:	http://dl.sourceforge.net/linux-atm/%{name}-%{version}.tar.gz
-# Source0-md5:	84fef49cc39ff2605204246666f65864
+# Source0-md5:	0b45a0e801fac7093ce4b0cadf419965
 Source1:	%{name}-2.4.0.1-pldrc.tar.gz
 # Source1-md5:	c76c7dbac5797db883b2b22687243839
-Source2:	http://home.sch.bme.hu/~cell/br2684/dist/001212/pppbr-001212-br2684ctl.c
 Patch0:		%{name}-syslog.patch
-Patch1:		%{name}-br2684ctl-syslog.patch
-Patch2:		%{name}-include.patch
-Patch3:		ftp://ftp.cmf.nrl.navy.mil/pub/chas/linux-atm/vbr/vbr-%{name}-diffs
-Patch4:		%{name}-llh-vbr.patch
-Patch5:		%{name}-gcc4.patch
-Patch6:		%{name}-LDFLAGS.patch
-Patch7:		%{name}-llh-includes.patch
+Patch1:		ftp://ftp.cmf.nrl.navy.mil/pub/chas/linux-atm/vbr/vbr-%{name}-diffs
+Patch2:		%{name}-llh-vbr.patch
 URL:		http://linux-atm.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -124,17 +98,11 @@ Skrypty startowe dla wsparcia obsługi ATM.
 
 %prep
 %setup -q -a1
-install -m644 %{SOURCE2} .
 %patch0 -p1
+%if %{with vbr}
 %patch1 -p1
 %patch2 -p1
-%if %{with vbr}
-%patch3 -p1
-%patch4 -p1
 %endif
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
 
 %build
 %{__libtoolize}
@@ -144,13 +112,10 @@ install -m644 %{SOURCE2} .
 %configure \
 	--sysconfdir=%{_sysconfdir}/atm \
 	--enable-cisco \
-	--enable-mpoa_1_1
+	--enable-mpoa_1_1 \
+	--enable-multipoint
 
 %{__make}
-
-pwd
-%{__cc} %{rpmcflags} %{rpmldflags} -Isrc/include pppbr-001212-br2684ctl.c \
-	-o br2684ctl -lresolv -Lsrc/lib/.libs -latm
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -159,8 +124,6 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/{atm,sysconfig/{interfaces,network-scri
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-install br2684ctl $RPM_BUILD_ROOT%{_sbindir}
 
 install src/config/hosts.atm $RPM_BUILD_ROOT%{_sysconfdir}
 install src/extra/ANS/e164_cc $RPM_BUILD_ROOT%{_sysconfdir}
