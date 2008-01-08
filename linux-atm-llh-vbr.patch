@@ -11,7 +11,7 @@
  /*
 --- linux-atm-2.4.1/src/include/linux/atm.h.orig	1970-01-01 01:00:00.000000000 +0100
 +++ linux-atm-2.4.1/src/include/linux/atm.h	2004-03-30 23:17:16.516196016 +0200
-@@ -0,0 +1,242 @@
+@@ -0,0 +1,279 @@
 +/* atm.h - general ATM declarations */
 +/* taken from linux-libc-headers-2.6.4.0-1 with VBR modifications */
 +
@@ -31,7 +31,6 @@
 + * documentation. Do not change them.
 + */
 +
-+#include <linux/types.h>
 +#include <linux/atmapi.h>
 +#include <linux/atmsap.h>
 +#include <linux/atmioc.h>
@@ -89,6 +88,9 @@
 +			    /* Service Access Point */
 +#define SO_ATMPVC	__SO_ENCODE(SOL_ATM,4,struct sockaddr_atmpvc)
 +			    /* "PVC" address (also for SVCs); get only */
++#define SO_MULTIPOINT	__SO_ENCODE(SOL_ATM, 5, int)
++			    /* make this vc a p2mp */
++
 +
 +/*
 + * Note @@@: since the socket layers don't really distinguish the control and
@@ -152,9 +154,11 @@
 +	int		min_pcr;	/* minimum PCR in cells per second */
 +	int		max_cdv;	/* maximum CDV in microseconds */
 +	int		max_sdu;	/* maximum SDU in bytes */
++
 +	/* extra params for VBR */
 +	int		scr;		/* sustained rate in cells per second */
 +	int		mbs;		/* maximum burst size (MBS) in cells */
++
 +        /* extra params for ABR */
 +        unsigned int 	icr;         	/* Initial Cell Rate (24-bit) */
 +        unsigned int	tbe;		/* Transient Buffer Exposure (24-bit) */ 
@@ -253,4 +257,37 @@
 +};
 +
 +typedef unsigned short atm_backend_t;
++struct atm_trafprm_compat {
++	unsigned char	traffic_class;	/* traffic class (ATM_UBR, ...) */
++	int		max_pcr;	/* maximum PCR in cells per second */
++	int		pcr;		/* desired PCR in cells per second */
++	int		min_pcr;	/* minimum PCR in cells per second */
++	int		max_cdv;	/* maximum CDV in microseconds */
++	int		max_sdu;	/* maximum SDU in bytes */
++        /* extra params for ABR */
++        unsigned int 	icr;         	/* Initial Cell Rate (24-bit) */
++        unsigned int	tbe;		/* Transient Buffer Exposure (24-bit) */ 
++        unsigned int 	frtt : 24;	/* Fixed Round Trip Time (24-bit) */
++        unsigned int 	rif  : 4;       /* Rate Increment Factor (4-bit) */
++        unsigned int 	rdf  : 4;       /* Rate Decrease Factor (4-bit) */
++        unsigned int nrm_pres  :1;      /* nrm present bit */
++        unsigned int trm_pres  :1;     	/* rm present bit */
++        unsigned int adtf_pres :1;     	/* adtf present bit */
++        unsigned int cdf_pres  :1;    	/* cdf present bit*/
++        unsigned int nrm       :3;     	/* Max # of Cells for each forward RM cell (3-bit) */
++        unsigned int trm       :3;    	/* Time between forward RM cells (3-bit) */    
++	unsigned int adtf      :10;     /* ACR Decrease Time Factor (10-bit) */
++	unsigned int cdf       :3;      /* Cutoff Decrease Factor (3-bit) */
++        unsigned int spare     :9;      /* spare bits */ 
++};
++
++struct atm_qos_compat {
++	struct atm_trafprm_compat txtp;	/* parameters in TX direction */
++	struct atm_trafprm_compat rxtp __ATM_API_ALIGN;
++					/* parameters in RX direction */
++	unsigned char aal __ATM_API_ALIGN;
++};
++
++#define SO_ATMQOS_COMPAT __SO_ENCODE(SOL_ATM,2,struct atm_qos_compat)
++			    /* Quality of Service setting (no vbr support) */
 +#endif
