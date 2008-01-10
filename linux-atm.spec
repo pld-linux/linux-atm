@@ -1,7 +1,7 @@
-# $Revision: 1.43 $ $Date: 2008-01-08 19:08:48 $
+# $Revision: 1.44 $ $Date: 2008-01-10 20:33:36 $
 #
 # TODO:
-#		- split to libatm-*, atm-init and atm-progs.
+# - split to libatm-*, atm-init and atm-progs.
 #
 # Conditional build:
 %bcond_without	oam	# without OAM (which needs ATM/OAM kernel patch)
@@ -12,7 +12,7 @@ Summary(pl.UTF-8):	Obsługa sieci ATM w Linuksie
 Name:		linux-atm
 Version:	2.5.0
 Release:	0.1
-License:	GPL
+License:	GPL v2+ (programs), LGPL v2 (library)
 Group:		Networking
 Source0:	http://dl.sourceforge.net/linux-atm/%{name}-%{version}.tar.gz
 # Source0-md5:	0b45a0e801fac7093ce4b0cadf419965
@@ -28,6 +28,7 @@ BuildRequires:	flex
 BuildRequires:	libtool
 BuildRequires:	rpmbuild(macros) >= 1.268
 Obsoletes:	atm
+Obsoletes:	br2684ctl
 Conflicts:	kernel-headers < 2.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -55,6 +56,7 @@ ATM), klientów i serwery LAN Emulation (LANE), Multiprotocol Over ATM
 %package devel
 Summary:	ATM on Linux - developer's package
 Summary(pl.UTF-8):	Obsługa sieci ATM w Linuksie - biblioteki i pliki nagłówkowe
+License:	LGPL v2
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	atm-devel
@@ -70,6 +72,7 @@ dla Linuksa.
 %package static
 Summary:	ATM on Linux - static libraries
 Summary(pl.UTF-8):	Obsługa sieci ATM w Linuksie - biblioteki statyczne
+License:	LGPL v2
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Obsoletes:	atm-static
@@ -152,30 +155,43 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc doc/README.* doc/atm-linux-howto.txt AUTHORS BUGS ChangeLog README THANKS
+%doc doc/README.* doc/atm-linux-howto.txt AUTHORS BUGS COPYING ChangeLog README THANKS
+%config %{_sysconfdir}/e164_cc
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/hosts.atm
 %attr(750,root,root) %dir %{_sysconfdir}/atm
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/atm/*
-%config %{_sysconfdir}/e164_cc
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/atm/atmsigd.conf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/atm/ilmi.conf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/atm/lane.conf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/atm/lecs.conf
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/libatm.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libatm.so.2
 %attr(751,root,root) /var/log/atm
-%{_mandir}/man*/*
+%{_mandir}/man4/atmsigd.conf.4*
+%{_mandir}/man7/qos.7*
+%{_mandir}/man7/sap.7*
+%{_mandir}/man8/*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
-%{_includedir}/*
+%attr(755,root,root) %{_libdir}/libatm.so
+%{_libdir}/libatm.la
+%{_includedir}/atm*.h
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libatm.a
 
 %files rc-scripts
 %defattr(644,root,root,755)
 %doc pld/README.PLD pld/interfaces/ifcfg-*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/atm
-%attr(755,root,root) /etc/sysconfig/network-scripts/*
+%attr(755,root,root) /etc/sysconfig/network-scripts/ifup-atm
+%attr(755,root,root) /etc/sysconfig/network-scripts/ifup-atm.post
+%attr(755,root,root) /etc/sysconfig/network-scripts/ifup-lec
+%attr(755,root,root) /etc/sysconfig/network-scripts/ifup-nas
+%attr(755,root,root) /etc/sysconfig/network-scripts/ifdown-atm
+%attr(755,root,root) /etc/sysconfig/network-scripts/ifdown-lec
+%attr(755,root,root) /etc/sysconfig/network-scripts/ifdown-nas
 %attr(754,root,root) /etc/rc.d/init.d/atm
