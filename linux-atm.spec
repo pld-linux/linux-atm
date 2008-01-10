@@ -1,4 +1,4 @@
-# $Revision: 1.44 $ $Date: 2008-01-10 20:33:36 $
+# $Revision: 1.45 $ $Date: 2008-01-10 20:37:29 $
 #
 # TODO:
 # - split to libatm-*, atm-init and atm-progs.
