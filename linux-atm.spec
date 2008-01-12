@@ -1,7 +1,4 @@
-# $Revision: 1.45 $ $Date: 2008-01-10 20:37:29 $
-#
-# TODO:
-# - split to libatm-*, atm-init and atm-progs.
+# $Revision: 1.46 $ $Date: 2008-01-12 23:35:26 $
 #
 # Conditional build:
 %bcond_without	oam	# without OAM (which needs ATM/OAM kernel patch)
@@ -27,6 +24,7 @@ BuildRequires:	automake
 BuildRequires:	flex
 BuildRequires:	libtool
 BuildRequires:	rpmbuild(macros) >= 1.268
+Requires:	%{name}-libs = %{version}-%{release}
 Obsoletes:	atm
 Obsoletes:	br2684ctl
 Conflicts:	kernel-headers < 2.4
@@ -53,21 +51,31 @@ realizujących najpopularniejsze usługi ATM, tj. Classical IP (IP over
 ATM), klientów i serwery LAN Emulation (LANE), Multiprotocol Over ATM
 (MPOA) i inne rozmaitości.
 
+%package libs
+Summary:	ATM on Linux - shared library
+Summary(pl.UTF-8):	Biblioteka współdzielona do obsługi sieci ATM w Linuksie
+License:	LGPL v2
+Group:		Libraries
+
+%description libs
+ATM on Linux - shared library.
+
+%description libs -l pl.UTF-8
+Biblioteka współdzielona do obsługi sieci ATM w Linuksie.
+
 %package devel
 Summary:	ATM on Linux - developer's package
-Summary(pl.UTF-8):	Obsługa sieci ATM w Linuksie - biblioteki i pliki nagłówkowe
+Summary(pl.UTF-8):	Obsługa sieci ATM w Linuksie - pliki nagłówkowe
 License:	LGPL v2
 Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}-libs = %{version}-%{release}
 Obsoletes:	atm-devel
 
 %description devel
-Libraries and header files needed for development ATM applications for
-Linux.
+Header files needed for development ATM applications for Linux.
 
 %description devel -l pl.UTF-8
-Biblioteki i pliki nagłówkowe niezbędne do opracowywania aplikacji ATM
-dla Linuksa.
+Pliki nagłówkowe niezbędne do opracowywania aplikacji ATM dla Linuksa.
 
 %package static
 Summary:	ATM on Linux - static libraries
@@ -78,11 +86,10 @@ Requires:	%{name}-devel = %{version}-%{release}
 Obsoletes:	atm-static
 
 %description static
-Static libraries needed for development ATM applications for Linux.
+Static libraries for development ATM applications for Linux.
 
 %description static -l pl.UTF-8
-Biblioteki statyczne niezbędne do opracowywania aplikacji ATM dla
-Linuksa.
+Biblioteki statyczne do opracowywania aplikacji ATM dla Linuksa.
 
 %package rc-scripts
 Summary:	ATM on Linux - rc-scripts
@@ -140,8 +147,8 @@ install pld/network-scripts/{ifup-*,ifdown-*} \
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
+%post	libs -p /sbin/ldconfig
+%postun	libs -p /sbin/ldconfig
 
 %post rc-scripts
 /sbin/chkconfig --add atm
@@ -165,13 +172,16 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/atm/lecs.conf
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
-%attr(755,root,root) %{_libdir}/libatm.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libatm.so.2
 %attr(751,root,root) /var/log/atm
 %{_mandir}/man4/atmsigd.conf.4*
 %{_mandir}/man7/qos.7*
 %{_mandir}/man7/sap.7*
 %{_mandir}/man8/*
+
+%files libs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libatm.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libatm.so.2
 
 %files devel
 %defattr(644,root,root,755)
