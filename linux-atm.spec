@@ -1,4 +1,4 @@
-# $Revision: 1.46 $ $Date: 2008-01-12 23:35:26 $
+# $Revision: 1.47 $ $Date: 2008-01-13 00:25:59 $
 #
 # Conditional build:
 %bcond_without	oam	# without OAM (which needs ATM/OAM kernel patch)
@@ -8,7 +8,7 @@ Summary:	ATM on Linux
 Summary(pl.UTF-8):	Obsługa sieci ATM w Linuksie
 Name:		linux-atm
 Version:	2.5.0
-Release:	0.1
+Release:	1
 License:	GPL v2+ (programs), LGPL v2 (library)
 Group:		Networking
 Source0:	http://dl.sourceforge.net/linux-atm/%{name}-%{version}.tar.gz
