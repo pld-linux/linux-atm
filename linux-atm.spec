@@ -1,4 +1,3 @@
-# $Revision: 1.48 $ $Date: 2008-08-30 11:32:03 $
 #
 # Conditional build:
 %bcond_without	oam	# without OAM (which needs ATM/OAM kernel patch)
