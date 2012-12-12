@@ -7,7 +7,7 @@ Summary:	ATM on Linux
 Summary(pl.UTF-8):	Obsługa sieci ATM w Linuksie
 Name:		linux-atm
 Version:	2.5.0
-Release:	2
+Release:	3
 License:	GPL v2+ (programs), LGPL v2 (library)
 Group:		Networking
 Source0:	http://dl.sourceforge.net/linux-atm/%{name}-%{version}.tar.gz
@@ -18,6 +18,7 @@ Patch0:		%{name}-syslog.patch
 Patch1:		ftp://ftp.cmf.nrl.navy.mil/pub/chas/linux-atm/vbr/vbr-%{name}-diffs
 Patch2:		%{name}-llh-vbr.patch
 Patch3:		%{name}-PATH_MAX.patch
+Patch4:		format-security.patch
 URL:		http://linux-atm.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -114,6 +115,7 @@ Skrypty startowe dla wsparcia obsługi ATM.
 %patch2 -p1
 %endif
 %patch3 -p1
+%patch4 -p1
 
 %build
 %{__libtoolize}
