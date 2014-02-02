@@ -6,18 +6,17 @@
 Summary:	ATM on Linux
 Summary(pl.UTF-8):	Obsługa sieci ATM w Linuksie
 Name:		linux-atm
-Version:	2.5.0
-Release:	3
+Version:	2.5.2
+Release:	1
 License:	GPL v2+ (programs), LGPL v2 (library)
 Group:		Networking
-Source0:	http://dl.sourceforge.net/linux-atm/%{name}-%{version}.tar.gz
-# Source0-md5:	0b45a0e801fac7093ce4b0cadf419965
+Source0:	http://download.sourceforge.net/linux-atm/%{name}-%{version}.tar.gz
+# Source0-md5:	d49499368c3cf15f73a05d9bce8824a8
 Source1:	%{name}-2.4.0.1-pldrc.tar.gz
 # Source1-md5:	c76c7dbac5797db883b2b22687243839
 Patch0:		%{name}-syslog.patch
 Patch1:		ftp://ftp.cmf.nrl.navy.mil/pub/chas/linux-atm/vbr/vbr-%{name}-diffs
 Patch2:		%{name}-llh-vbr.patch
-Patch3:		%{name}-PATH_MAX.patch
 Patch4:		format-security.patch
 URL:		http://linux-atm.sourceforge.net/
 BuildRequires:	autoconf
@@ -107,6 +106,18 @@ rc-scripts for ATM support.
 %description rc-scripts -l pl.UTF-8
 Skrypty startowe dla wsparcia obsługi ATM.
 
+%package firmware
+Summary:	Firmware for Fore PCA/SBA 200e ATM NICs
+Summary(pl.UTF-8):	Firmware dla kart siecowych ATM Fore PCA/SBA 200e
+Group:		Base/Kernel
+BuildArch:	noarch
+
+%description firmware
+Firmware for Fore PCA/SBA 200e ATM NICs.
+
+%description firmware -l pl.UTF-8
+Firmware dla kart siecowych ATM Fore PCA/SBA 200e.
+
 %prep
 %setup -q -a1
 %patch0 -p1
@@ -114,7 +125,6 @@ Skrypty startowe dla wsparcia obsługi ATM.
 %patch1 -p1
 %patch2 -p1
 %endif
-%patch3 -p1
 %patch4 -p1
 
 %build
@@ -132,7 +142,8 @@ Skrypty startowe dla wsparcia obsługi ATM.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/{atm,sysconfig/{interfaces,network-scripts},rc.d/init.d} \
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/{atm,sysconfig/interfaces,rc.d/init.d} \
+	$RPM_BUILD_ROOT/lib/rc-scripts \
 	$RPM_BUILD_ROOT/var/log/atm
 
 %{__make} install \
@@ -145,7 +156,7 @@ install pld/atm/*.conf $RPM_BUILD_ROOT%{_sysconfdir}/atm
 install pld/init.d/atm $RPM_BUILD_ROOT/etc/rc.d/init.d
 install pld/sysconfig/atm $RPM_BUILD_ROOT/etc/sysconfig
 install pld/network-scripts/{ifup-*,ifdown-*} \
-		$RPM_BUILD_ROOT/etc/sysconfig/network-scripts
+		$RPM_BUILD_ROOT/lib/rc-scripts
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -200,11 +211,17 @@ fi
 %defattr(644,root,root,755)
 %doc pld/README.PLD pld/interfaces/ifcfg-*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/atm
-%attr(755,root,root) /etc/sysconfig/network-scripts/ifup-atm
-%attr(755,root,root) /etc/sysconfig/network-scripts/ifup-atm.post
-%attr(755,root,root) /etc/sysconfig/network-scripts/ifup-lec
-%attr(755,root,root) /etc/sysconfig/network-scripts/ifup-nas
-%attr(755,root,root) /etc/sysconfig/network-scripts/ifdown-atm
-%attr(755,root,root) /etc/sysconfig/network-scripts/ifdown-lec
-%attr(755,root,root) /etc/sysconfig/network-scripts/ifdown-nas
+%attr(755,root,root) /lib/rc-scripts/ifup-atm
+%attr(755,root,root) /lib/rc-scripts/ifup-atm.post
+%attr(755,root,root) /lib/rc-scripts/ifup-lec
+%attr(755,root,root) /lib/rc-scripts/ifup-nas
+%attr(755,root,root) /lib/rc-scripts/ifdown-atm
+%attr(755,root,root) /lib/rc-scripts/ifdown-lec
+%attr(755,root,root) /lib/rc-scripts/ifdown-nas
 %attr(754,root,root) /etc/rc.d/init.d/atm
+
+%files firmware
+%defattr(644,root,root,755)
+/lib/firmware/pca200e.bin
+/lib/firmware/pca200e_ecd.bin2
+/lib/firmware/sba200e_ecd.bin2
