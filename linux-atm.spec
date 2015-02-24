@@ -7,7 +7,7 @@ Summary:	ATM on Linux
 Summary(pl.UTF-8):	Obsługa sieci ATM w Linuksie
 Name:		linux-atm
 Version:	2.5.2
-Release:	1
+Release:	2
 License:	GPL v2+ (programs), LGPL v2 (library)
 Group:		Networking
 Source0:	http://download.sourceforge.net/linux-atm/%{name}-%{version}.tar.gz
