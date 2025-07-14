@@ -120,12 +120,12 @@ Firmware dla kart siecowych ATM Fore PCA/SBA 200e.
 
 %prep
 %setup -q -a1
-%patch0 -p1
+%patch -P0 -p1
 %if %{with vbr}
-%patch1 -p1
-%patch2 -p1
+%patch -P1 -p1
+%patch -P2 -p1
 %endif
-%patch4 -p1
+%patch -P4 -p1
 
 %build
 %{__libtoolize}
