@@ -1,5 +1,6 @@
---- linux-atm-2.4.1/src/include/atm.h.orig	2004-03-30 23:01:43.000000000 +0200
-+++ linux-atm-2.4.1/src/include/atm.h	2004-03-30 23:17:27.548518848 +0200
+diff -urNp -x '*.orig' linux-atm-2.5.2.org/src/include/atm.h linux-atm-2.5.2/src/include/atm.h
+--- linux-atm-2.5.2.org/src/include/atm.h	2026-03-03 00:07:47.493541621 +0100
++++ linux-atm-2.5.2/src/include/atm.h	2026-03-03 00:07:47.589825186 +0100
 @@ -8,7 +8,7 @@
  
  #include <stdint.h>
@@ -7,10 +8,11 @@
 -#include <linux/atm.h>
 +#include "linux/atm.h"
  
- 
- /*
---- linux-atm-2.4.1/src/include/linux/atm.h.orig	1970-01-01 01:00:00.000000000 +0100
-+++ linux-atm-2.4.1/src/include/linux/atm.h	2004-03-30 23:17:16.516196016 +0200
+ #ifdef  __cplusplus
+ extern "C" {
+diff -urNp -x '*.orig' linux-atm-2.5.2.org/src/include/linux/atm.h linux-atm-2.5.2/src/include/linux/atm.h
+--- linux-atm-2.5.2.org/src/include/linux/atm.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-atm-2.5.2/src/include/linux/atm.h	2026-03-03 00:07:47.590034455 +0100
 @@ -0,0 +1,279 @@
 +/* atm.h - general ATM declarations */
 +/* taken from linux-libc-headers-2.6.4.0-1 with VBR modifications */
