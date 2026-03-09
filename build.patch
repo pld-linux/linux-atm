@@ -1,0 +1,24 @@
+diff --git a/src/arpd/arp.c b/src/arpd/arp.c
+index 92d3787..466062f 100644
+--- a/src/arpd/arp.c
++++ b/src/arpd/arp.c
+@@ -14,6 +14,7 @@
+ #include <assert.h>
+ #include <sys/types.h>
+ #include <sys/socket.h> /* for linux/if_arp.h */
++#include <net/if.h> /* for IFNAMSIZ */
+ #include <netinet/in.h> /* for ntohs, etc. */
+ #define _LINUX_NETDEVICE_H /* very crude hack for glibc2 */
+ #include <linux/types.h>
+diff --git a/src/arpd/itf.c b/src/arpd/itf.c
+index 92f0951..3e81305 100644
+--- a/src/arpd/itf.c
++++ b/src/arpd/itf.c
+@@ -12,6 +12,7 @@
+ #include <sys/types.h>
+ #include <linux/atmclip.h>
+ #include <sys/socket.h>
++#include <net/if.h> /* for IFNAMSIZ */
+ #define _LINUX_NETDEVICE_H /* glibc2 */
+ #include <linux/types.h>
+ #include <linux/if_arp.h>

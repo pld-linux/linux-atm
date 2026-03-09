@@ -7,7 +7,7 @@ Summary:	ATM on Linux
 Summary(pl.UTF-8):	Obsługa sieci ATM w Linuksie
 Name:		linux-atm
 Version:	2.5.2
-Release:	3
+Release:	4
 License:	GPL v2+ (programs), LGPL v2 (library)
 Group:		Networking
 Source0:	http://download.sourceforge.net/linux-atm/%{name}-%{version}.tar.gz
@@ -17,6 +17,7 @@ Source1:	%{name}-2.4.0.1-pldrc.tar.gz
 Patch0:		%{name}-syslog.patch
 Patch1:		ftp://ftp.cmf.nrl.navy.mil/pub/chas/linux-atm/vbr/vbr-%{name}-diffs
 Patch2:		%{name}-llh-vbr.patch
+Patch3:		build.patch
 Patch4:		format-security.patch
 URL:		http://linux-atm.sourceforge.net/
 BuildRequires:	autoconf
@@ -125,6 +126,7 @@ Firmware dla kart siecowych ATM Fore PCA/SBA 200e.
 %patch -P1 -p1
 %patch -P2 -p1
 %endif
+%patch -P3 -p1
 %patch -P4 -p1
 
 %build
@@ -133,6 +135,7 @@ Firmware dla kart siecowych ATM Fore PCA/SBA 200e.
 %{__automake}
 %{__autoconf}
 %configure \
+	CFLAGS="%{rpmcflags} -std=gnu89" \
 	--sysconfdir=%{_sysconfdir}/atm \
 	--enable-cisco \
 	--enable-mpoa_1_1 \
